@@ -1,4 +1,4 @@
-package 자료구조;
+package 구간합;
 
 import java.util.Scanner;
 public class 평균구하기 {
