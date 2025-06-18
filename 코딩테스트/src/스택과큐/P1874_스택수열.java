@@ -34,7 +34,7 @@ public class P1874_스택수열 {
 				}else {
 					bf.append("-\n");
 				}
-			}
+			}m
 		}
 		if(result) System.out.println(bf.toString());
 	}
