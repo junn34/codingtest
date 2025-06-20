@@ -7,7 +7,7 @@ public class 구간합구하기2 {
 		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st=new StringTokenizer(br.readLine());
 		int N=Integer.parseInt(st.nextToken());
-		int M=Integer.parseInt(st.nextToken());
+		
 		
 		int A[][]=new int[N+1][N+1];
 		

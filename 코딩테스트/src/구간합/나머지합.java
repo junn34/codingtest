@@ -26,7 +26,7 @@ public class 나머지합 {
 			}
 		}
 		System.out.println(answer);
-
+		sc.close();
 	}
 
 }

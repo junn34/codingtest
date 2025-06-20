@@ -25,6 +25,7 @@ public class 연속된자연수의합 {
 			}
 		}
 		System.out.println(count);
+		sc.close();
 	}
 
 }
