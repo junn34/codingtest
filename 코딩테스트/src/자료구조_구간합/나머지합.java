@@ -1,4 +1,4 @@
-package 구간합;
+package 자료구조_구간합;
 
 import java.util.Scanner;
 import java.io.*;

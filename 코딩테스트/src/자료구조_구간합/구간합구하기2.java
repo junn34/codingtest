@@ -1,4 +1,4 @@
-package 구간합;
+package 자료구조_구간합;
 import java.io.*;
 import java.util.*;
 public class 구간합구하기2 {

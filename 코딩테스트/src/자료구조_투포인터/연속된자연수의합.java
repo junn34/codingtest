@@ -1,4 +1,4 @@
-package 투포인터;
+package 자료구조_투포인터;
 
 import java.util.Scanner;
 

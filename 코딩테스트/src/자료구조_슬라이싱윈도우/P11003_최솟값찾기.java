@@ -1,4 +1,4 @@
-package 슬라이싱윈도우;
+package 자료구조_슬라이싱윈도우;
 
 import java.io.*;
 import java.util.*;
