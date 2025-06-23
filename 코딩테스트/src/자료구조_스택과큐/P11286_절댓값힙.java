@@ -1,4 +1,4 @@
-package 스택과큐;
+package 자료구조_스택과큐;
 
 import java.io.*;
 import java.util.PriorityQueue;
