@@ -1,30 +1,27 @@
 package 자료구조_구간합;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import java.util.StringTokenizer;
+import java.util.*;
+
 public class 구간합 {
 
-	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer stringTokenizer = new StringTokenizer(bufferedReader.readLine());
-		int suNo=Integer.parseInt(stringTokenizer.nextToken());
-		int quizNo=Integer.parseInt(stringTokenizer.nextToken());
-		long[] S= new long[suNo +1];
-		stringTokenizer = new StringTokenizer(bufferedReader.readLine());
-		for(int i=1;i<=suNo;i++) {
-			S[i]=S[i-1] + Integer.parseInt(stringTokenizer.nextToken());
-		}
-		for(int q=0;q<quizNo;q++) {
-			stringTokenizer = new StringTokenizer(bufferedReader.readLine());
-			int i=Integer.parseInt(stringTokenizer.nextToken());
-			int j=Integer.parseInt(stringTokenizer.nextToken());
-			System.out.println(S[j]-S[i-1]);
-		}
-		
-		
-	}
+	  public static void main(String[] args) {
+		    Scanner sc=new Scanner(System.in);
+		    int N=sc.nextInt();
+		    int M=sc.nextInt();
+		    int[] arr=new int[N];
+		    int[] S=new int[N+1];
+		    S[0]=0;
+		    for(int i=0;i<N;i++){
+		      arr[i]=sc.nextInt();
+		    }
+		    for(int i=1;i<=N;i++){
+		      S[i]=arr[i-1]+S[i-1];
+		    }
+		    for(int i=0;i<M;i++){
+		      int input1=sc.nextInt();
+		      int input2=sc.nextInt();
+		      System.out.println(S[input2]-S[input1-1]);
+		    }
+		  }
 
 }
