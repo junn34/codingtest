@@ -22,6 +22,7 @@ public class 구간합 {
 		      int input2=sc.nextInt();
 		      System.out.println(S[input2]-S[input1-1]);
 		    }
-		  }
+		   }
 
-}
+} 
+ 
