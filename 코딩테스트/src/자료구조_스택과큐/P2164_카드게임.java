@@ -9,18 +9,18 @@ public class P2164_카드게임 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner sc=new Scanner(System.in);
-		Queue<Integer> myQueue=new LinkedList<>();
-		int N=sc.nextInt();
-		for(int i=1;i<=N;i++) {
-			myQueue.add(i);
-		}
-		while(myQueue.size()>1) {
-			myQueue.poll();
-			myQueue.add(myQueue.poll());
-			
-		}
-		System.out.println(myQueue.poll());
-		sc.close();
+	    int N=sc.nextInt();
+	    int num=N;
+	    Queue<Integer> queue=new LinkedList<>();
+	    for(int i=1;i<=N;i++){
+	      queue.add(i);
+	    }
+	    while(queue.size()!=1){
+	      queue.poll();
+	      int n=queue.poll();
+	      queue.add(n);
+	    }
+	    System.out.println(queue.poll());
 	}
 	
 
