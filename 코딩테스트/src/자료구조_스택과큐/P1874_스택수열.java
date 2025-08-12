@@ -1,42 +1,40 @@
 package 자료구조_스택과큐;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class P1874_스택수열 {
 
-	public static void main(String[] args) {
-		Scanner sc=new Scanner(System.in);
-		int N=sc.nextInt();
-		int[] A=new int[N];
-		for(int i=0;i<N;i++) {
-			A[i]=sc.nextInt();
-		}
-		Stack<Integer> stack = new Stack<>();
-		int num=1;
-		boolean result=true;
-		StringBuffer bf=new StringBuffer();
-		for(int i=0;i<A.length;i++) {
-			int su=A[i];
-			if(su >=num) {
-				while(su>=num) {
-					stack.push(num++);
-					bf.append("+\n");
-				}
-				stack.pop();
-				bf.append("-\n");
-			}else {
-				int n=stack.pop();
-				if(n>su) {
-					System.out.println("NO");
-					result=false;
-					break;
-				}else {
-					bf.append("-\n");
-				}
-			}
-		}
-		if(result) System.out.println(bf.toString());
-	}
+	public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        Stack<Integer> stack = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+        int start = 0;
+
+        while (n-- > 0) {
+            int k = Integer.parseInt(br.readLine());
+
+            if (k > start) {
+                for (int i = start + 1; i <= k; i++) {
+                    stack.push(i);
+                    sb.append('+').append('\n');
+                }
+                start = k;
+            }
+
+            if (stack.peek() == k) {
+                stack.pop();
+                sb.append('-').append('\n');
+            } else {
+                System.out.println("NO");
+                return;
+            }
+        }
+
+        System.out.println(sb);
+    }
 
 }
