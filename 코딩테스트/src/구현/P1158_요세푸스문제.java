@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 
@@ -20,32 +18,26 @@ public class P1158_요세푸스문제 {
 		int N=Integer.parseInt(st.nextToken());
 		int K=Integer.parseInt(st.nextToken());
 		
-		Queue<Integer> queue= new LinkedList<>();
+		StringBuilder sb=new StringBuilder();
 		ArrayList<Integer> al=new ArrayList<>();
-		int cnt=0;
-		int i=1;
-		int nope=0;
-		while(al.size()!=N) {
+		
+		for(int i=1;i<=N;i++) {
 			
-			queue.add(i);
-			queue.poll();
-			if(i==N) {
-				int min=al.get(0);
-				for(int j=1;j<al.size();j++) {
-					if(min>al.get(j)) min=al.get(j);
-				}
-				i=min;
-			}
-			i++;
-			cnt++;
-			if(cnt==3) {
-				nope=i-1;
-				al.add(nope);
-				cnt=0;
-			}
-			
+			al.add(i);
+		}
+		int now=0;
+		sb.append('<');
+		while(!al.isEmpty()) {
+			now=(now+K-1 )% al.size();
+			sb.append(al.remove(now));
+			if(!al.isEmpty()) sb.append(", ");
 			
 		}
+		
+		sb.append('>');
+//		sb.deleteCharAt(sb.length()-1);
+		
+		System.out.println(sb);
 	}
 
 }
