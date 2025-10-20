@@ -1,5 +1,3 @@
-package Deque;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -43,7 +41,7 @@ public class P2346_풍선터뜨리기 {
 				
 			}
 			else {
-				for(int i=0;i<-p.num-1;i++) {
+				for(int i=0;i<-p.num;i++) {
 					Balloon k=deque.pollLast();
 					deque.addFirst(k);
 				}
