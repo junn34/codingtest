@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class P1806_부분합 {
+public class P2003_수들의합2 {
 
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
@@ -12,28 +12,25 @@ public class P1806_부분합 {
 		StringTokenizer st=new StringTokenizer(br.readLine());
 		
 		int N=Integer.parseInt(st.nextToken());
-		int S=Integer.parseInt(st.nextToken());
-		
-		st=new StringTokenizer(br.readLine());
+		int M=Integer.parseInt(st.nextToken());
 		int[] arr=new int[N];
+		st=new StringTokenizer(br.readLine());
 		for(int i=0;i<N;i++) {
 			arr[i]=Integer.parseInt(st.nextToken());
 		}
-		int len=0;
 		int left=0;
 		int sum=0;
-		int minlen=Integer.MAX_VALUE;
+		int cnt=0;
 		for(int right=0;right<N;right++) {
-			sum+=arr[right];
 			
-			while(sum>=S) {
-				len=right-left+1;
-				if(len<minlen) minlen=len;
+			sum+=arr[right];
+			while(sum>M) {
 				sum-=arr[left++];
+				
 			}
+			if(sum==M) cnt++; 
 		}
-		
-		System.out.println(minlen==Integer.MAX_VALUE? 0:minlen);
+		System.out.println(cnt);
 		
 	}
 
