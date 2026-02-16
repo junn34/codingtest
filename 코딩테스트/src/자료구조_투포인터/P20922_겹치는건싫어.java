@@ -10,32 +10,33 @@ public class P20922_겹치는건싫어 {
 		// TODO Auto-generated method stub
 		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st=new StringTokenizer(br.readLine());
-		
 		int N=Integer.parseInt(st.nextToken());
 		int K=Integer.parseInt(st.nextToken());
-		int[] arr=new int[N];
 		st=new StringTokenizer(br.readLine());
-		int maxVal=0;
+		
+		int max=0;
+		int[] arr=new int[N];
+		
 		for(int i=0;i<N;i++) {
 			arr[i]=Integer.parseInt(st.nextToken());
-			if(arr[i]>maxVal) maxVal=arr[i];
+			if(max<arr[i]) max=arr[i];
 		}
-		int[] cnt=new int[maxVal+1];
-		
+		int[] cnt=new int[max+1];
+		int maxlen=Integer.MIN_VALUE;
 		int left=0;
-		int ans=0;
+		int len=0;
 		for(int right=0;right<N;right++) {
 			cnt[arr[right]]++;
+			len=right-left+1;
 			while(cnt[arr[right]]>K) {
+				
 				cnt[arr[left]]--;
 				left++;
+				
 			}
-			ans=Math.max(ans, right-left+1);
-			
-		}
+			maxlen=Math.max(maxlen, right-left+1);		}
+		System.out.println(maxlen);
 		
-		
-		System.out.println(ans);
 		
 		
 	}
