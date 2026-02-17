@@ -1,44 +1,31 @@
 package 구현;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
 
 public class P1181_단어정렬 {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-		
-		int N=Integer.parseInt(br.readLine());
-		String[] arr=new String[N];
-		
+		Scanner sc=new Scanner(System.in);
+		int N=sc.nextInt();
+		sc.nextLine(); 
+		HashSet<String> set=new HashSet<>();
 		for(int i=0;i<N;i++) {
-			arr[i]=br.readLine();
+			set.add(sc.nextLine());
 		}
-		
-		Arrays.sort(arr, new Comparator<String>() {
-			@Override
-			public int compare(String s1,String s2) {
-				if(s1.length() ==s2.length()) {
-					return s1.compareTo(s2);
-				}
-				else {
-					return s1.length()-s2.length();
-				}
-			}
-			
+		List<String> list=new ArrayList<>(set);
+		Collections.sort(list,(a,b)->{
+			if(a.length()==b.length()) return a.compareTo(b);
+			return a.length()-b.length();
 		});
-		StringBuilder sb=new StringBuilder();
-		sb.append(arr[0]).append('\n');
-		for(int i=1;i<N;i++) {
-			if(!arr[i].equals(arr[i-1])) {
-				sb.append(arr[i]).append('\n');
-			}
-		}
-		System.out.println(sb);
 		
+		for(String s:list) {
+			System.out.println(s);
+		}
 		
 	}
 
