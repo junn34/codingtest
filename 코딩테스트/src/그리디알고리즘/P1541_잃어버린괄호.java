@@ -1,46 +1,31 @@
 package 그리디알고리즘;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class P1541_잃어버린괄호 {
 
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-		String str=br.readLine();
-		
-		String[] arr=str.split("-");
+		Scanner sc=new Scanner(System.in);
+		String str1=sc.nextLine();
+		String[] str=str1.split("-");
 		int sum=0;
-		int minus=0;
-		for(int i=0;i<arr.length;i++) {
-			
-			if(i==0) {
-				if(arr[i].contains("+")) {
-					String[] arr2=arr[i].split("\\+");
-					for(int j=0;j<arr2.length;j++) {
-						sum+=Integer.parseInt(arr2[j]);
-					}
-				}
-				else{
-					sum+=Integer.parseInt(arr[i]);
-				}
+		for(int i=0;i<str.length;i++) {
+			int temp=0;
+			if(str[i].contains("+")) {
+				String[] str2=str[i].split("\\+");
+				for(String s:str2) temp+=Integer.parseInt(s);
 			}
-			else {
+			else temp+=Integer.parseInt(str[i]); 
 				
-				if(arr[i].contains("+")) {
-					String[] arr2=arr[i].split("\\+");
-					for(int j=0;j<arr2.length;j++) {
-						minus+=Integer.parseInt(arr2[j]);
-					}
-				}
-				else{
-					minus+=Integer.parseInt(arr[i]);
-				}
-			}
-						
+			if(i==0) sum+=temp;
+			else sum-=temp;
+			
+			
 		}
-		System.out.println(sum-minus);
+		System.out.println(sum);
+		
+		
 	}
 
 }
