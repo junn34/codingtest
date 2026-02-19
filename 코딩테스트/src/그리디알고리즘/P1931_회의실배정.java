@@ -11,29 +11,27 @@ public class P1931_회의실배정 {
 		// TODO Auto-generated method stub
 		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 		int N=Integer.parseInt(br.readLine());
-		Integer[][] arr=new Integer[N][2];
 		
 		StringTokenizer st;
+		int[][] arr=new int[N][2];
 		for(int i=0;i<N;i++) {
 			st=new StringTokenizer(br.readLine());
 			arr[i][0]=Integer.parseInt(st.nextToken());
-			arr[i][1]=Integer.parseInt(st.nextToken());
-			
+			arr[i][1]=Integer.parseInt(st.nextToken());	
 		}
 		Arrays.sort(arr,(a,b)->{
-			if(a[1]!=b[1]) return a[1]-b[1];
-			return a[0]-b[0];
+			if(a[1]==b[1]) return a[0]-b[0];
+			return a[1]-b[1];
 		});
+		int cnt=0;
 		int endtime=0;
-		int count=0;
 		for(int i=0;i<N;i++) {
 			if(arr[i][0]>=endtime) {
-				count++;
 				endtime=arr[i][1];
+				cnt++;
 			}
 		}
-		System.out.println(count);
-		
+		System.out.println(cnt);
 	}
 
 }
