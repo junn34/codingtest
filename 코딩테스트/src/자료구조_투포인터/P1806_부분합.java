@@ -13,28 +13,29 @@ public class P1806_부분합 {
 		
 		int N=Integer.parseInt(st.nextToken());
 		int S=Integer.parseInt(st.nextToken());
-		
-		st=new StringTokenizer(br.readLine());
 		int[] arr=new int[N];
+		st=new StringTokenizer(br.readLine());
+		
 		for(int i=0;i<N;i++) {
 			arr[i]=Integer.parseInt(st.nextToken());
 		}
-		int len=0;
 		int left=0;
-		int sum=0;
 		int minlen=Integer.MAX_VALUE;
-		for(int right=0;right<N;right++) {
+		int sum=arr[0];
+		int cnt=0;
+		for(int right=1;right<N;right++) {
 			sum+=arr[right];
-			
 			while(sum>=S) {
-				len=right-left+1;
-				if(len<minlen) minlen=len;
+				cnt++;
+				minlen=Math.min(minlen, right-left+1);
 				sum-=arr[left++];
 			}
 		}
+		if(cnt==0) System.out.println(0);
+		else System.out.println(minlen==Integer.MAX_VALUE?0:minlen);
 		
-		System.out.println(minlen==Integer.MAX_VALUE? 0:minlen);
 		
-	}
+		
+	}	
 
 }
