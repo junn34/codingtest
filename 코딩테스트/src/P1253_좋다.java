@@ -1,38 +1,36 @@
-package 그리디알고리즘;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.StringTokenizer;
 
-public class P2212_센서 {
+public class P1253_좋다 {
 
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
 		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 		int N=Integer.parseInt(br.readLine());
-		int K=Integer.parseInt(br.readLine());
+		Integer[] arr=new Integer[N];
 		StringTokenizer st=new StringTokenizer(br.readLine());
-		
-		int[] arr=new int[N];
-		
 		for(int i=0;i<N;i++) {
 			arr[i]=Integer.parseInt(st.nextToken());
 		}
-		Arrays.sort(arr);
-		
-		int max=0;
-		int idx=0;
-		
-		for(int i=0;i<N-1;i++) {
-			int gap=arr[i+1]-arr[i];
-			if(max<gap) {
-				max=gap;
-				idx=i;
+		Arrays.sort(arr,Collections.reverseOrder());
+		int left=0;
+		int right=0;
+		int cnt=0;
+		for(int now=0;now<N;now++) {
+			for(int i=now+1;i<N-1;i++) {
+				for(int j=i+1;j<N;j++) {
+					int cur=arr[i]+arr[j];
+					if(cur==arr[now]) {
+						cnt++;
+						break;
+					}
+				}
 			}
 		}
-		sum=(arr[idx]-arr[idx-1])
-		System.out.println(N-max);
+		System.out.println(cnt);
 		
 		
 	}
