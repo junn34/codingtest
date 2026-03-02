@@ -9,65 +9,65 @@ public class P16918_봄버맨 {
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
 		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-	
+		
 		StringTokenizer st=new StringTokenizer(br.readLine());
 		int R=Integer.parseInt(st.nextToken());
 		int C=Integer.parseInt(st.nextToken());
 		int N=Integer.parseInt(st.nextToken());
-		char[][] board=new char[R][C];//격자판
-		int[][] time=new int[R][C]; //폭발 시간 저장용
-		N--;//아무것도안함
-		for(int i=0;i<R;i++) { //초기 상태 저장
-			String str=br.readLine();
-			char[] arr=str.toCharArray();
+	
+		char[][] board=new char[R][C];
+		int[][] bombtime=new int[R][C];
+		for(int i=0;i<R;i++) {
+			String s=br.readLine();
 			for(int j=0;j<C;j++) {
-				board[i][j]=arr[j];
-				if(board[i][j]=='O') time[i][j]=2;
-				
+				board[i][j]=s.charAt(j);
+				if(board[i][j]=='O') bombtime[i][j]=3;
 			}
 		}
-		while(N!=0) {
-			for(int i=0;i<R;i++) { //설치 안된 모든칸 폭탄설치
-				for(int j=0;j<C;j++) {
-					if(board[i][j]=='.') {
-						board[i][j]='O';
-						time[i][j]=3;
-					}
-					else time[i][j]--;
-				}
-			}
-			N--;
-			for(int i=0;i<R;i++) { //폭발
-				for(int j=0;j<C;j++) {
-					if(board[i][j]=='O') {
-						time[i][j]--;
-						if(time[i][j]==0) {
-							board[i+1][j]='.';
-							time[i+1][j]=0;
-							board[i-1][j]='.';
-							time[i-1][j]=0;
-							board[i][j+1]='.';
-							time[i][j+1]=0;
-							board[i][j-1]='.';
-							time[i][j-1]=0;
+		int time=1;
+		
+		int[] dx= {-1,1,0,0};
+		int[] dy= {0,0,-1,1};
+		while(time++<N) {
+			if(time%2==0) {
+				for(int i=0;i<R;i++) {
+					for(int j=0;j<C;j++) {
+						if(board[i][j]=='.') {
+							bombtime[i][j]=time+3;
+							board[i][j]='O';
 						}
 					}
-					else time[i][j]--;
 				}
-				
 			}
-			N--;
+			else {
+				for(int i=0;i<R;i++) {
+					for(int j=0;j<C;j++) {
+						if(bombtime[i][j]==time) {
+							bombtime[i][j]=0;
+							board[i][j]='.';
+							for(int d=0;d<4;d++) {
+								int nx=i+dx[d];
+								int ny=j+dy[d];
+								if(nx>=0&&ny>=0&&nx<R&&ny<C&&bombtime[nx][ny]!=time) {
+									board[nx][ny]='.';
+									bombtime[nx][ny]=0;
+								}
+								
+							}
+						}
+					}
+				}
+			}
 		}
-		StringBuilder sb=new StringBuilder();
+		
 		for(int i=0;i<R;i++) {
-			for(int j=0;j<C;j++) {
-				if(j==C-1) sb.append(board[i][j]).append("\n");
-				else sb.append(board[i][j]);
-				
-			}
+			System.out.println(board[i]);
 		}
-		System.out.println(sb);
-
+		
+		
+		
+		
+		
 	}
-
+	
 }
