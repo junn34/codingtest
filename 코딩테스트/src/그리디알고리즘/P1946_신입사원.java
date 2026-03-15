@@ -10,31 +10,43 @@ public class P1946_신입사원 {
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
 		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		int T=Integer.parseInt(br.readLine());
 		StringTokenizer st;
-		int T=Integer.parseInt(br.readLine()); //테스트 케이스
+		
 		StringBuilder sb=new StringBuilder();
 		for(int i=0;i<T;i++) {
+			
 			int N=Integer.parseInt(br.readLine());
-			int[][] arr=new int[N][2];
+			int[][] test=new int[N][2];
+			
 			for(int j=0;j<N;j++) {
+			
 				st=new StringTokenizer(br.readLine());
-				arr[j][0]=Integer.parseInt(st.nextToken());//서류
-				arr[j][1]=Integer.parseInt(st.nextToken());//면접
+				int paper=Integer.parseInt(st.nextToken());
+				int interview=Integer.parseInt(st.nextToken());
+				test[j][0]=paper;
+				test[j][1]=interview;
+				
 			}
-			Arrays.sort(arr,(a,b)->{
-				return a[0]-b[0];
+			if(N==1) {
+				sb.append(1).append("\n");
+				continue;
+			}
+			Arrays.sort(test,(a,b)->{
+				return a[1]-b[1];
 			});
-			int min=arr[0][1];
 			int cnt=1;
+			int min=test[0][0];
 			for(int j=1;j<N;j++) {
-				if(min>arr[j][1]) {
-					cnt++;
-					min=arr[j][1];
+				if(test[j][0]<min) {
+					min=test[j][0];
+					cnt++; 	
 				}
 			}
 			sb.append(cnt).append("\n");
 		}
 		System.out.println(sb);
+		
 	}
 
 }
