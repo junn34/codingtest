@@ -9,30 +9,37 @@ public class P16953_AB {
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
 		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		
 		StringTokenizer st=new StringTokenizer(br.readLine());
+		int A=Integer.parseInt(st.nextToken());
+		int B=Integer.parseInt(st.nextToken());
 		
-		long A=Long.parseLong(st.nextToken());
-		long B=Long.parseLong(st.nextToken());		
+		int cnt=0;
 		
-		
-		int ans=1;
 		while(B!=A) {
-			String s=String.valueOf(B);
-			//B가 2로 나누어지지 않거나 끝이 1이 아니면 -1출력
-			if(B%2!=0 && s.charAt(s.length()-1)!='1'){
-				ans=-1;
+			if(A>B) {
+				cnt=-2;
 				break;
 			}
+			
 			if(B%2==0) {
 				B/=2;
-			}else {
-				s=s.substring(0,s.length()-1);
-				B=Long.parseLong(s);
+				cnt++;
 			}
-			ans++;
+			else if(B%10==1) {
+				String s=String.valueOf(B);
+				s=s.substring(0,s.length()-1);
+				B=Integer.parseInt(s);
+				cnt++;
+			}
+			else {
+				cnt=-2;
+				break;
+			}
+			
 		}
-		System.out.println(ans);
 		
+		System.out.println(cnt+1);
 	}
 
 }

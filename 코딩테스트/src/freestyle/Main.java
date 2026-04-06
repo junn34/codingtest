@@ -1,87 +1,52 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    static int N;               // 보드 크기
-    static char[][] board;      // 사탕 보드
-    static int answer = 1;      // 최대 연속 사탕 길이 (최소 1)
+	static int maxValue=Integer.MIN_VALUE;
+	static int minValue=Integer.MAX_VALUE;
+	static int[] operator = new int[4];
+	static int[] number;
+	static int N;
+    public static void main(String[] args) throws Exception {
+        
+    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    	 N = Integer.parseInt(br.readLine()); //숫자의 개수
+         number = new int[N]; //숫자 넣을 배열 초기화
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        N = sc.nextInt();       // 보드 크기 입력
-        board = new char[N][N];
-
-        // 보드 입력
-        for (int i = 0; i < N; i++) {
-            String s = sc.next();
-            for (int j = 0; j < N; j++) {
-                board[i][j] = s.charAt(j);
-            }
-        }
-
-        // 모든 위치에서 오른쪽 / 아래쪽과 교환 시도
-        // (왼쪽, 위는 중복되므로 볼 필요 없음)
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-
-                // 오른쪽 칸과 교환 가능한 경우
-                if (j + 1 < N && board[i][j] != board[i][j + 1]) {
-                    swap(i, j, i, j + 1);          // 두 칸 교환
-                    answer = Math.max(answer, check()); // 전체 보드 검사
-                    swap(i, j, i, j + 1);          // 다시 원상복구
-                }
-
-                // 아래쪽 칸과 교환 가능한 경우
-                if (i + 1 < N && board[i][j] != board[i + 1][j]) {
-                    swap(i, j, i + 1, j);          // 두 칸 교환
-                    answer = Math.max(answer, check()); // 전체 보드 검사
-                    swap(i, j, i + 1, j);          // 다시 원상복구
-                }
-            }
-        }
-
-        System.out.println(answer); // 최대 연속 사탕 출력
+         // 숫자 입력
+         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+         for (int i = 0; i < N; i++) {
+             number[i] = Integer.parseInt(st.nextToken());
+         }
+         st = new StringTokenizer(br.readLine(), " ");
+         for (int i = 0; i < 4; i++) { //더하기, 빼기, 곱하기, 나누기 연산자가 존재하므로 총 4개
+             operator[i] = Integer.parseInt(st.nextToken());
+         }
+         solution(number[0], 1);
     }
-
-    // 두 위치의 사탕을 교환하는 함수
-    static void swap(int x1, int y1, int x2, int y2) {
-        char temp = board[x1][y1];
-        board[x1][y1] = board[x2][y2];
-        board[x2][y2] = temp;
-    }
-
-    // 현재 보드에서 가로/세로 최대 연속 사탕 길이 구하는 함수
-    static int check() {
-        int max = 1;
-
-        // 가로 검사
-        for (int i = 0; i < N; i++) {
-            int count = 1;
-            for (int j = 1; j < N; j++) {
-                // 왼쪽 사탕과 색이 같으면 연속 길이 증가
-                if (board[i][j] == board[i][j - 1]) {
-                    count++;
-                } else {
-                    count = 1; // 색이 다르면 연속 끊김
-                }
-                max = Math.max(max, count);
-            }
+    public static void solution(int num, int index) {
+    	if (index == N) {
+            maxValue = Math.max(maxValue, num);
+            minValue = Math.min(minValue, num);
+            return;
         }
-
-        // 세로 검사
-        for (int j = 0; j < N; j++) {
-            int count = 1;
-            for (int i = 1; i < N; i++) {
-                // 위쪽 사탕과 색이 같으면 연속 길이 증가
-                if (board[i][j] == board[i - 1][j]) {
-                    count++;
-                } else {
-                    count = 1;
-                }
-                max = Math.max(max, count);
-            }
-        }
-
-        return max; // 최대 연속 길이 반환
+    	for(int i=0;i<4;i++) {
+    		operator[i]--;
+    		switch(i) {
+    		 case 0: //더하기일 경우
+                 solution(num + number[index], index + 1);
+                 break;
+             case 1: //빼기일 경우
+                 solution(num - number[index], index + 1);
+                 break;
+             case 2: //곱하기일 경우
+                 solution(num * number[index], index + 1);
+                 break;
+             case 3: //나누기일 경우
+                 solution(num / number[index], index + 1);
+                 break;
+    		}
+    		operator[i]++;
+    	}
     }
 }
